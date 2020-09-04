@@ -1,6 +1,5 @@
 import {DogsService} from './state/dogs.service';
 import { DogsQuery } from './state/dogs.query';
-import { DogsStore } from './state/dogs.store';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
