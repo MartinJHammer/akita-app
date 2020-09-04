@@ -1,11 +1,11 @@
 import { Query } from '@datorama/akita';
 import { Injectable } from '@angular/core';
-import { ToDosState, ToDosStore } from './ToDos.store';
+import { TodosState, TodosStore } from './todos.store';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ToDosQuery extends Query<ToDosState> {
+export class TodosQuery extends Query<TodosState> {
     public allState$ = this.select();
     public selectName$ = this.select('name');
 
@@ -20,7 +20,7 @@ export class ToDosQuery extends Query<ToDosState> {
         ]
     );
 
-    constructor(protected store: ToDosStore) {
+    constructor(protected store: TodosStore) {
         super(store);
     }
 }
