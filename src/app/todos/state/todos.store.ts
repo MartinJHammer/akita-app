@@ -1,6 +1,6 @@
 import { StoreConfig, EntityState, EntityStore } from '@datorama/akita';
 import { Injectable } from '@angular/core';
-import { ToDo as Todo } from '../models/todo.model';
+import { Todo } from '../models/todo.model';
 
 export interface TodosState extends EntityState<Todo, number> {
     filter: string;
@@ -9,7 +9,7 @@ export interface TodosState extends EntityState<Todo, number> {
 @Injectable({
     providedIn: 'root'
 })
-@StoreConfig({ name: 'todos', idKey: '_rowNumber' })
+@StoreConfig({ name: 'todos', idKey: 'rowNumber' })
 export class TodosStore extends EntityStore<TodosState> {
     constructor() {
         super({ filter: 'ALL' });

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TodosService } from '../../state/todos.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-todos-index',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToDosIndexComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private todos: TodosService,
+  ) { }
 
   ngOnInit(): void {
+    this.todos.setFilter().completed();
+    this.todos.getFilter().pipe(
+      tap(x => console.log(x))
+    ).subscribe();
   }
 
 }

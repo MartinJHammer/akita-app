@@ -7,6 +7,11 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { environment } from '../environments/environment';
 import { DogsComponent } from './dogs/dogs.component';
+import { enableAkitaProdMode } from '@datorama/akita';
+
+if (environment.production) {
+  enableAkitaProdMode();
+}
 
 @NgModule({
   declarations: [
