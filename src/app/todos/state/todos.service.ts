@@ -1,17 +1,15 @@
-import { TodosStore } from './todos.store';
+import { TodosState, todosStore } from './todos.store';
 import { Injectable } from '@angular/core';
-import { TodosQuery } from './todos.query';
 import { Observable } from 'rxjs';
+import { todosQuery } from './todos.query';
 
 class Filters {
-    constructor(private store: TodosStore) {}
-
     public completed(): void {
-        this.store.update({ filter: 'COMPLETED' });
+        todosStore.update({ filter: 'COMPLETED' });
     }
 
     public uncompleted(): void {
-        this.store.update({ filter: 'UNCOMPLETED' });
+        todosStore.update({ filter: 'UNCOMPLETED' });
     }
 }
 
@@ -19,16 +17,26 @@ class Filters {
     providedIn: 'root'
 })
 export class TodosService {
-    constructor(
-        private store: TodosStore,
-        private query: TodosQuery
-    ) { }
+    private allState$: Observable<TodosState> = todosQuery.select();
+    private currentFilters$: Observable<string> = todosQuery.select(state => state.filter);
+
+    constructor() { }
+
+    public getState(): Observable<TodosState> {
+        return this.allState$;
+    }
 
     public setFilter(): Filters {
-        return new Filters(this.store);
+        return new Filters();
     }
 
     public getFilter(): Observable<string> {
-        return this.query.currentFilter$;
+        return this.currentFilters$;
+    }
+
+    public updateFilter(filter: string): void {
+        todosStore.update(state => {
+            state.filter = filter;
+        });
     }
 }

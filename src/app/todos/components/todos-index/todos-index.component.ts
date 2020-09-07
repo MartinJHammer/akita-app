@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from '../../state/todos.service';
-import { tap } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-todos-index',
@@ -18,6 +18,6 @@ export class ToDosIndexComponent implements OnInit {
     this.todos.getFilter().pipe(
       tap(x => console.log(x))
     ).subscribe();
+    this.todos.updateFilter('plop');
   }
-
 }

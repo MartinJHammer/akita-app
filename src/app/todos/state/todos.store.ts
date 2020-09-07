@@ -6,12 +6,10 @@ export interface TodosState extends EntityState<Todo, number> {
     filter: string;
 }
 
-@Injectable({
-    providedIn: 'root'
-})
-@StoreConfig({ name: 'todos', idKey: 'rowNumber' })
-export class TodosStore extends EntityStore<TodosState> {
+@StoreConfig({ name: 'todos', idKey: 'rowNumber'})
+class TodosStore extends EntityStore<TodosState> {
     constructor() {
         super({ filter: 'ALL' });
     }
 }
+export const todosStore = new TodosStore();
